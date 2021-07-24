@@ -1,0 +1,51 @@
+.addPostContainer{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    width: 30rem;
+    padding: 2rem;
+    background-color: rgb(192, 245, 220);
+    border-radius: 10px;
+    box-shadow: 5px 10px 15px #888888;
+    .addPostHeading{
+        font-size: 2rem;
+        text-decoration: underline;
+        font-weight: bold;
+        padding: 0.5rem;
+        text-shadow: 5px 10px 15px #888888;
+    }
+    .inputBoxContainer{
+        position: relative;
+        .postInput{
+            box-shadow: 5px 10px 15px #888888;
+            border-radius: 5px;
+            height: 2rem;
+            width: 30rem;
+            outline: none;
+            font-size: 1.5rem;
+            //align-self: stretch;
+        }
+        right: 2%;
+        padding: 1rem;
+    }
+    .inputBtnContainer{
+        .postSubmit{
+            box-shadow: 5px 10px 15px #888888;
+            background-color: rgb(9, 140, 216);
+            color: white;
+            height: 2rem;
+            width: 10rem;
+            border-radius: 5px;
+            font-size: 1.5rem;
+            &:hover{
+                cursor: pointer;
+                background-color: rgb(255, 255, 255);
+                color: rgb(9, 140, 216);
+            }
+        }
+        
+        
+    }
+}
