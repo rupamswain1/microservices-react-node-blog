@@ -7,7 +7,10 @@ const commetSchema=new Schema({
         required:true
     },
     comments:[
-        {comment:String},
+        {comment:String,addedOn:{
+            type:Date,
+            default:Date.now,
+        }},
     ]
 })
 module.exports=mongoose.model('CommentMaster',commetSchema);

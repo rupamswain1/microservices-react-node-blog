@@ -33,7 +33,7 @@ Router.get('/:id',(req,res)=>{
                     res.status(201).json(obj);
                 }
                 else{
-                    res.status(404).json({postId:postId,mesage:'No Comments found'});
+                    res.status(200).json({postId:postId,message:'No Comments found'});
                 }
                 
             })
