@@ -7,7 +7,7 @@ Router.post('/',(req,res,next)=>{
     console.log(req.body.title)
     new Posts({title:req.body.title, content:req.body.content}).save()
     .then(result=>{
-        res.status(201).json({title:result.title,content:result.content,addedOn:result.addedOn});
+        res.status(201).json({_id:result._id,title:result.title,content:result.content,addedOn:result.addedOn});
     })
     .catch(err=>{
         console.log(err),

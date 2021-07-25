@@ -1,0 +1,114 @@
+.postMainContainer{
+    position:relative;
+    height: 50vh;
+    width:25%;
+    background-color: rgb(126, 236, 141);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-self: center;
+    margin:1%;
+    box-shadow: 5px 10px 15px #888888;
+    .postTitle{
+        font-weight: bold;
+        font-size: 1.25rem;
+        text-decoration: underline;
+    }
+    .postDescription{
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        border:1px solid white;
+        border-radius: 5px;
+        width: 24vw;
+        height: 10vh;
+        align-self: center;
+        overflow: auto;
+        text-align: left;
+    }
+    .postaddedOn{
+        font-size: 0.7rem;
+        position: relative;
+        left:-9vw;
+    }
+    .postComments{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        border: 1px solid blanchedalmond;
+        height: 31vh;
+        width: 23vw;
+        align-self: center;
+        .commentHeader{
+            font-weight: bold;
+            font-size: 1.25rem;
+            text-decoration: underline;
+        }
+        .enterComment{
+            .enterCommentForm{
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            position: relative;
+            .commentInput{
+                width: 12vw;
+                margin:1%;
+            }
+            .commentSubmitBtn{
+                width: 9vw;
+                height: 4.5vh;
+                margin-top: 1%;
+                background-color: rgb(9, 138, 59);
+                border-radius: 5px;
+                color: white;
+                font-weight: bold;
+                &:hover{
+                    background-color: white;
+                    color: rgb(9, 138, 59);
+                    cursor: pointer;
+                }
+            }
+            }
+        }
+        .commentsSection{
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            border:1px solid white;
+            border-radius: 5px;
+            width: 22vw;
+            height: 20vh;
+            margin-top: -8%;
+            align-self: center;
+            overflow: auto;
+            justify-content: center;
+            .comment{
+                position: relative;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                border:1px solid white;
+                border-radius: 5px;
+                width: 21vw;
+                align-self:flex-start;
+                //justify-content: left;
+                margin: 0.5vh;
+                background-color: rgb(212, 233, 245);
+                .commentDate{
+                    font-size: 0.5rem;
+                    position: relative;
+                    left:-8vw;
+                }
+                .commetText{
+                    position: relative;
+                    display: flex;
+                    justify-content: left;
+                    text-align: left;
+                }
+            }
+        }
+    }
+}

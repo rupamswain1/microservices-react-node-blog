@@ -21,10 +21,11 @@
         .postInput{
             box-shadow: 5px 10px 15px #888888;
             border-radius: 5px;
-            height: 2rem;
-            width: 30rem;
+            height: 1.5rem;
+            width: 25rem;
             outline: none;
             font-size: 1.5rem;
+            margin: 1%;
             //align-self: stretch;
         }
         right: 2%;
@@ -36,9 +37,9 @@
             background-color: rgb(9, 140, 216);
             color: white;
             height: 2rem;
-            width: 10rem;
+            width: 12rem;
             border-radius: 5px;
-            font-size: 1.5rem;
+            font-size: 1rem;
             &:hover{
                 cursor: pointer;
                 background-color: rgb(255, 255, 255);

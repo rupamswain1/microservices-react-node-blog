@@ -1,12 +1,20 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import './addPost.style.scss';
-
-const AddPost=()=>{
+import axios from 'axios';
+const AddPost=({updatePost})=>{
     const [postInput,setPostInput]=useState('');
-    const submitPost=(e)=>{
+    const [postDesc,setPostDesc]=useState('');
+
+    //console.log(posts)
+    const submitPost=async (e)=>{
         e.preventDefault();
-        //post code here
-        console.log('submitted')
+        const body={title:postInput,content:postDesc};
+        const response=await axios.post('http://localhost:8000/posts/',body,{headers:{'Content-Type': 'application/json'}});
+        //console.log(updatePost);
+        //updatePost(post=>[...post,response.data])
+        setPostInput('');
+        setPostDesc('');
+        //console.log('submitted')
     }
     return(
         <div className='addPostContainer'>
@@ -16,10 +24,11 @@ const AddPost=()=>{
             <div className='inputGroup'>
                 <form onSubmit={submitPost}>
                     <div className='inputBoxContainer'>
-                        <input placeHolder="Enter Post Here" value={postInput} type='text' className='postInput' onChange={e=>setPostInput(e.target.value)}/>
+                        <input placeHolder="Enter Post Title Here" value={postInput} type='text' className='postInput' onChange={e=>setPostInput(e.target.value)}/>
+                        <input placeHolder="Enter Post Description Here" value={postDesc} type='text' className='postInput' onChange={e=>setPostDesc(e.target.value)}/>
                     </div>
                     <div className='inputBtnContainer'>
-                        <input type='submit' className='postSubmit'/>
+                        <input type='submit' value='Submit Post' className='postSubmit'/>
                     </div>
                 </form>
             </div>
