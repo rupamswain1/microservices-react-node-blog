@@ -4,7 +4,7 @@
 node-comment-service/node_modules
 node-post-service/node_modules
 react-client/node_modules
-
+event-bus/node_modules
 
 # testing
 /coverage
