@@ -2,9 +2,10 @@ const express=require('express');
 
 const Router=express();
 const Comment=require('../models/comments');
-
+const axios=require('axios');
 Router.post('/:id',(req,res)=>{
     const postId=req.params.id;
+    let addedComment;
     Comment.findOne({postId:postId})
         .then(commentObj=>{
             if(commentObj){
@@ -15,14 +16,61 @@ Router.post('/:id',(req,res)=>{
             }
         })
         .then(result=>{
-            Comment.findOne({postId:postId})
-            .then(obj=>{
-                res.status(201).json(obj);
-            })
-        }).
-        catch(err=>{
-            res.status(500).json(err)
+            Comment.aggregate([
+
+                {
+                    $match:  {postId: postId}
+                },
+                {
+                    $unwind: "$comments"
+                },
+                {
+                    $sort: {'comments.addedOn': -1}
+                },
+                {
+                    $limit: 1
+                },{
+                    $project: { comments: 1, _id: 0 }
+            
+                }
+               
+            ]).exec((err, result) => {
+                if (err) res.send(JSON.stringify(err));
+                if (result) {
+                    const body={
+                        comment:req.body.comment,
+                        postId:postId
+                    }
+                    axios.post('http://localhost:8005/events/comment',body)
+                    .then(done=>{
+                        res.status(201).send({_id:result[0].comments._id,addedOn:result[0].comments.addedOn,comment:req.body.comment,});
+                    }
+
+                    );
+                }
+            
+            }); 
         })
+        // .then(result=>{
+        //     Comment.findOne({postId:postId}).select('comments').sort({"comments.comment.addedOn":'1'})
+        //     .then(obj=>{
+        //         console.log(obj)
+        //         const body={
+        //             postId:postId,
+        //             comment: req.body.comment,
+        //         }
+        //         res.status(201).json(obj);
+        //        // 
+                
+        //     })
+        // })//.
+        // // then(addedComment=>{
+        // //     res.status(201).json(obj);
+        // // })
+        // .catch(err=>{
+        //     console.log(err)
+        //     res.status(500).json(err)
+        // })
 })
 
 Router.get('/:id',(req,res)=>{
