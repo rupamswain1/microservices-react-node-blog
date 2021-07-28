@@ -37,10 +37,13 @@ Router.post('/:id',(req,res)=>{
             ]).exec((err, result) => {
                 if (err) res.send(JSON.stringify(err));
                 if (result) {
+
                     const body={
                         comment:req.body.comment,
-                        postId:postId
+                        postId:postId,
+                        commentId:result[0].comments._id
                     }
+                    
                     axios.post('http://localhost:8005/events/comment',body)
                     .then(done=>{
                         res.status(201).send({_id:result[0].comments._id,addedOn:result[0].comments.addedOn,comment:req.body.comment,});

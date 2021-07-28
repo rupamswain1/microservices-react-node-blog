@@ -5,20 +5,29 @@ const axios = require('axios')
 
 Router.post('/',(req,res,next)=>{
     console.log(req.body.title)
+    let results={};
     new Posts({title:req.body.title, content:req.body.content}).save()
     .then(result=>{
         const body={
             title:result.title,
             addedOn:result.addedOn,
-            content:result.content
+            content:result.content,
+            _id:result._id
         }
+        results=body;
+        console.log('emtted to event bus for post create')
         return axios.post('http://localhost:8005/events/posts',body)
         
       
     })
     .then(querrySuccess=>{
-        console.log('emtted to event bus for post create')
-        res.status(201).json({_id:result._id,title:result.title,content:result.content,addedOn:result.addedOn});
+        console.log(results)
+        if(querrySuccess.status===201){
+            res.status(201).json({_id:results._id,title:results.title,content:results.content,addedOn:results.addedOn});
+        }
+        else{
+            throw new Error('Event Bus is Down')
+        }       
     }
 
     )

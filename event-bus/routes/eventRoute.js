@@ -7,7 +7,7 @@ Router.post('/posts',(req,res,next)=>{
     console.log('new Post')
     console.log(body)
    // axios.post('http://localhost:8002/events/post',body);
-   res.status({})
+   res.status(201).json({message:'success'});
 })
 
 Router.post('/comment',(req,res,next)=>{
@@ -16,5 +16,6 @@ Router.post('/comment',(req,res,next)=>{
     console.log(req.body);
     res.status(201);
     //axios.post('http://localhost:8002/events/comment',body);
+    res.status(201).json({message:'success'});
 })
 module.exports = Router;
