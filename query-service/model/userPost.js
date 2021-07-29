@@ -4,11 +4,11 @@ const Schema=mongoose.Schema;
 
 const userPostSchema=new Schema({
     postId:{
-        value:String,
+        type:String,
         required:true
     },
     title:{
-        value:String,
+        type:String,
         required:true
     },
     content:String,

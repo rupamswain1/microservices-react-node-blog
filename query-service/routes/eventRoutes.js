@@ -3,34 +3,35 @@ const Router=express();
 const UserPost=require('../model/userPost');
 
 Router.post('/newPost',(req,res)=>{
+    console.log(req.body.title)
     const postId=req.body.postId;
     const title=req.body.title;
     const content=req.body.content;
 
     const post=new UserPost({postId:postId, title:title, content:content});
-    post,save()
+    post.save()
     .then(result=>{
-        res.status(201).json(message:'success');
+        res.status(201).json({message:'success'});
     })
     .catch(err=>console.log(err));
 })
 
 Router.post('/newComment',(req,res)=>{
-    const commentId=req.commentId,
-    const postId=req.postId,
-    const comment=req.comment,
+    const commentId=req.body.commentId;
+    const postId=req.body.postId;
+    const comment=req.body.comment;
 
     UserPost.findOne({postId:postId})
         .then(commentObj=>{
             if(commentObj){
-                return Comment.updateOne({postId:postId},{$push:{comments:{comment:req.body.comment}}})
+                return UserPost.updateOne({postId:postId},{$push:{comments:{comment:req.body.comment,commentId:req.body.commentId}}})
             }
             else{
-                return new Comment({postId:postId,comments:[{comment:req.body.comment}]}).save();
+                return new UserPost({postId:postId,comments:[{comment:req.body.comment}]}).save();
             }
         })
         .then(done=>{
-            res.status(201).json({"message done"})
+            res.status(201).json({message:"success"})
         })
 })
 //connect to eventBuss

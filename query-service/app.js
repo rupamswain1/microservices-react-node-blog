@@ -2,8 +2,10 @@ const express=require('express');
 const app=express()
 const mongoose=require('mongoose');
 const cors=require('cors')
+const eventRoutes=require('./routes/eventRoutes');
 
-
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 app.use(cors());
 app.use((req,res,next)=>{
     res.setHeader('Access-Control-Allow-Origin','*');
@@ -12,8 +14,8 @@ app.use((req,res,next)=>{
     next();
 })
 
-app.use('/events')
-app.use('/posts')
+app.use('/events',eventRoutes)
+//app.use('/posts')
 
 mongoose.connect('mongodb+srv://rupam123:rupam123@nodecluster.plaky.mongodb.net/MicroserviceBlogBD?retryWrites=true&w=majority')
 .then(result=>{
