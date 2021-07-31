@@ -6,6 +6,7 @@ const axios = require('axios')
 Router.post('/',(req,res,next)=>{
     console.log(req.body.title)
     let results={};
+    let postId;
     new Posts({title:req.body.title, content:req.body.content}).save()
     .then(result=>{
         const body={
@@ -14,6 +15,7 @@ Router.post('/',(req,res,next)=>{
             content:result.content,
             _id:result._id
         }
+        postId=result._id;
         results=body;
         console.log('emtted to event bus for post create')
         return axios.post('http://localhost:8005/events/posts',body)
@@ -32,8 +34,16 @@ Router.post('/',(req,res,next)=>{
 
     )
     .catch(err=>{
-        console.log(err),
-        res.status(500).json({error:err});
+       // console.log('********************************* I threw the error**********************************')
+        Posts.findOneAndDelete({_id:postId})
+        .then(resp=>{
+            res.status(500).json({error:err.response.data.error});
+        })
+        .catch(err=>{
+            console.log(err)
+            console.log('error deleting post')
+        })
+       
     })
 });
 

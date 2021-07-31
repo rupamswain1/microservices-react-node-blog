@@ -6,6 +6,8 @@ const axios=require('axios');
 Router.post('/:id',(req,res)=>{
     const postId=req.params.id;
     let addedComment;
+    let extCommentId;
+   
     Comment.findOne({postId:postId})
         .then(commentObj=>{
             if(commentObj){
@@ -37,7 +39,8 @@ Router.post('/:id',(req,res)=>{
             ]).exec((err, result) => {
                 if (err) res.send(JSON.stringify(err));
                 if (result) {
-
+                    extCommentId=result[0].comments._id;
+                    
                     const body={
                         comment:req.body.comment,
                         postId:postId,
@@ -46,10 +49,19 @@ Router.post('/:id',(req,res)=>{
                     
                     axios.post('http://localhost:8005/events/comment',body)
                     .then(done=>{
+                        console.log(done)
                         res.status(201).send({_id:result[0].comments._id,addedOn:result[0].comments.addedOn,comment:req.body.comment,});
                     }
-
-                    );
+                    )
+                    .catch(err=>{
+                        console.log(err.response.data.error)
+                        Comment.findOneAndUpdate({postId:postId},{$pull:{comments:{_id:extCommentId}}})
+                        .then(r=>{
+                            console.log('comment deleted')
+                            res.status(500).json({error:err.response.data.error});  
+                        })
+                       
+                    })
                 }
             
             }); 

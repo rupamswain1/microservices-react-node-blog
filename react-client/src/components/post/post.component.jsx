@@ -2,33 +2,35 @@ import React,{useState,useEffect} from 'react';
 import './post.style.scss';
 import axios from 'axios';
 const Post=(singlePost)=>{
-    const {_id,title,content,addedOn}=singlePost.data;
-    const [comments,setComments]=useState([]);
+    //console.log(singlePost.data)
+    const {_id,postId,title,content,addedOn,comments}=singlePost.data;
+    //const [comments,setComments]=useState([]);
     const [postComment,setPostComment]=useState();
-    const [dataLoaded,setDataLoaded]=useState(false);
-    useEffect(()=>{
+    //const [dataLoaded,setDataLoaded]=useState(false);
+    // useEffect(()=>{
        
-        axios.get(`http://localhost:8001/comments/${_id}`,{headers:{'Content-Type': 'application/json'}})
-        .then(commentResult=>{
-            //console.log(commentResult)
-            if(!commentResult.data.message===undefined){
-                setComments([]);
-                setDataLoaded(true)
-            }
-            else{
-                setComments(commentResult.data.comments);
-                setDataLoaded(true)
-            }
-            //console.log(comments.length);
-        })
-        .catch(err=>console.log(err))
-    },[])
+    //     axios.get(`http://localhost:8001/comments/${_id}`,{headers:{'Content-Type': 'application/json'}})
+    //     .then(commentResult=>{
+    //         //console.log(commentResult)
+    //         if(!commentResult.data.message===undefined){
+    //             setComments([]);
+    //             setDataLoaded(true)
+    //         }
+    //         else{
+    //             setComments(commentResult.data.comments);
+    //             setDataLoaded(true)
+    //         }
+    //         //console.log(comments.length);
+    //     })
+    //     .catch(err=>console.log(err))
+    // },[])
 
     const submitComment= async(event)=>{
             event.preventDefault();
             const body={comment:postComment};
-            const response=await axios.post(`http://localhost:8001/comments/${_id}`,body,{headers:{'Content-Type': 'application/json'}});
-            setComments(response.data.comments);
+            const response=await axios.post(`http://localhost:8001/comments/${postId}`,body,{headers:{'Content-Type': 'application/json'}});
+            console.log(response.data)
+            comments.push(response.data);
             //console.log(comments)
             setPostComment('')
     }
@@ -58,7 +60,7 @@ const Post=(singlePost)=>{
                     </form>
                 </div>
                 <div className='commentsSection'>
-                    {dataLoaded===true?
+                    {comments.length>0?
                         (comments?
                             (
                                 comments.map(comment=>(
@@ -80,7 +82,7 @@ const Post=(singlePost)=>{
                                     </div>
                             ))
                         :
-                        <div>Loading</div>
+                        <div>No Comments</div>
                     }
                        
                 </div>

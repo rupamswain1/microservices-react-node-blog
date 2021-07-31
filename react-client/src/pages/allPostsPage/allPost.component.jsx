@@ -7,7 +7,7 @@ const AllPostPage=()=>{
     const [posts,setPosts]=useState([]);
     const [dataLoaded,setDataLoaded]=useState(false);
     useEffect(()=>{
-        axios.get('http://localhost:8000/posts/',{headers:{'Content-Type': 'application/json'}})
+        axios.get('http://localhost:8002/posts/',{headers:{'Content-Type': 'application/json'}})
         .then(respose=>{
             console.log(respose.data.length)
             setPosts(respose.data)
@@ -26,7 +26,7 @@ const AllPostPage=()=>{
             <div className='displayAllPostMainContainer'>
                 {dataLoaded?
                     (   posts.length===0?<div>No Post Available</div>
-                        :posts.map(singlePost=><Post key={singlePost._id} data={singlePost}/>
+                        :posts.map(singlePost=><Post key={singlePost.postId} data={singlePost}/>
                     ))
                 :<>Loader code should be here</>}
                

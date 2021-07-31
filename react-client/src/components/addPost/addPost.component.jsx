@@ -9,8 +9,15 @@ const AddPost=({updatePost})=>{
         e.preventDefault();
         const body={title:postInput,content:postDesc};
         const response=await axios.post('http://localhost:8000/posts/',body,{headers:{'Content-Type': 'application/json'}});
-        //console.log(updatePost);
-        updatePost(post=>[...post,response.data])
+        console.log(response.data);
+        const newPost={
+            postId:response.data._id,
+            title:response.data.title,
+            content:response.data.content,
+            addedOn:response.data.addedOn,
+            comments:[]
+        }
+        updatePost(post=>[...post,newPost])
         setPostInput('');
         setPostDesc('');
         //console.log('submitted')
