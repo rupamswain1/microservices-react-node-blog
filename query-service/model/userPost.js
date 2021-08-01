@@ -14,14 +14,12 @@ const userPostSchema=new Schema({
     content:String,
     addedOn:{
             type:Date,
-            default:Date.now,
     },
     comments:[
         {
             comment:String,
             addedOn:{
             type:Date,
-            default:Date.now,
             },
             commentId:String
         },

@@ -44,7 +44,8 @@ Router.post('/:id',(req,res)=>{
                     const body={
                         comment:req.body.comment,
                         postId:postId,
-                        commentId:result[0].comments._id
+                        commentId:result[0].comments._id,
+                        addedOn:result[0].comments.addedOn
                     }
                     
                     axios.post('http://localhost:8005/events/comment',body)

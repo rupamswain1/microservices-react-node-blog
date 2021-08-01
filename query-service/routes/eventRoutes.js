@@ -7,8 +7,8 @@ Router.post('/newPost',(req,res)=>{
     const postId=req.body._id;
     const title=req.body.title;
     const content=req.body.content;
-
-    const post=new UserPost({postId:postId, title:title, content:content});
+    const addedOn=req.body.addedOn;
+    const post=new UserPost({postId:postId, title:title, content:content,addedOn:addedOn});
     post.save()
     .then(result=>{
         res.status(201).json({message:'success'});
@@ -30,10 +30,10 @@ Router.post('/newComment',(req,res)=>{
         .then(commentObj=>{
             if(commentObj){
                 
-                return UserPost.updateOne({postId:postId},{$push:{comments:{comment:req.body.comment,commentId:req.body.commentId}}})
+                return UserPost.updateOne({postId:postId},{$push:{comments:{comment:req.body.comment,commentId:req.body.commentId,addedOn:req.body.addedOn}}})
             }
             else{
-                return new UserPost({postId:postId,comments:[{comment:req.body.comment,commentId:req.body.commentId}]}).save();
+                return new UserPost({postId:postId,comments:[{comment:req.body.comment,commentId:req.body.commentId,addedOn:req.body.addedOn}]}).save();
             }
         })
         .then(done=>{
