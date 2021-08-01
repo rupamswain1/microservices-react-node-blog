@@ -55,11 +55,11 @@ Router.post('/:id',(req,res)=>{
                     )
                     .catch(err=>{
                         console.log(err.response.data.error)
-                        Comment.findOneAndUpdate({postId:postId},{$pull:{comments:{_id:extCommentId}}})
-                        .then(r=>{
-                            console.log('comment deleted')
-                            res.status(500).json({error:err.response.data.error});  
-                        })
+                        // Comment.findOneAndUpdate({postId:postId},{$pull:{comments:{_id:extCommentId}}})
+                        // .then(r=>{
+                        //     console.log('comment deleted')
+                        //     res.status(500).json({error:err.response.data.error});  
+                        // })
                        
                     })
                 }

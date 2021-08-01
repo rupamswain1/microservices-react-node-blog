@@ -16,7 +16,8 @@ Router.post('/newPost',(req,res)=>{
     .catch(err=>{    
         console.log(err._message)
        //console.log('error occured')
-        res.status(500).json({error:err._message+' error is in Query service, /newPost'});
+        //res.status(500).json({error:err._message+' error is in Query service, /newPost'});
+        res.send({});
     });
 })
 
@@ -40,7 +41,8 @@ Router.post('/newComment',(req,res)=>{
         })
         .catch(err=>{    
             console.log(err._message)
-            res.status(500).json({error:err._message+' error is in Query service, /newComment'});
+            //res.status(500).json({error:err._message+' error is in Query service, /newComment'});
+            res.send({});
         });
 })
 //connect to eventBuss

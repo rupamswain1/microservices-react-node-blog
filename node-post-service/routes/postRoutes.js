@@ -35,14 +35,14 @@ Router.post('/',(req,res,next)=>{
     )
     .catch(err=>{
        // console.log('********************************* I threw the error**********************************')
-        Posts.findOneAndDelete({_id:postId})
-        .then(resp=>{
-            res.status(500).json({error:err.response.data.error});
-        })
-        .catch(err=>{
-            console.log(err)
-            console.log('error deleting post')
-        })
+        // Posts.findOneAndDelete({_id:postId})
+        // .then(resp=>{
+        //     res.status(500).json({error:err.response.data.error});
+        // })
+        // .catch(err=>{
+        //     console.log(err)
+        //     console.log('error deleting post')
+        // })
        
     })
 });

@@ -17,7 +17,8 @@ Router.post('/posts',(req,res,next)=>{
     })
     .catch(err=>{
         //console.log()
-        res.status(500).json({error:err.response.data.error})
+        //res.status(500).json({error:err.response.data.error})
+        res.send({});
     })
    
 })
@@ -38,7 +39,8 @@ Router.post('/comment',(req,res,next)=>{
     })
     .catch(err=>{
         console.log(err.response.data.error)
-        res.status(500).json({error:err.response.data.error})
+        //res.status(500).json({error:err.response.data.error})
+        res.send({})
     })
 })
 module.exports = Router;
