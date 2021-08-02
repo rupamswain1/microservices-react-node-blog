@@ -6,6 +6,7 @@ const postSchema=new Schema({
     addedOn:{
         type:Date,
     },
+    action:String,
     title:{type:String, required: true},
     content:{
         type:String,

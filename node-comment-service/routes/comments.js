@@ -48,24 +48,30 @@ Router.post('/:id',(req,res)=>{
                         addedOn:result[0].comments.addedOn
                     }
                     
-                    axios.post('http://localhost:8005/events/comment',body)
-                    .then(done=>{
-                        console.log(done)
-                        res.status(201).send({_id:result[0].comments._id,addedOn:result[0].comments.addedOn,comment:req.body.comment,});
-                    }
-                    )
-                    .catch(err=>{
-                        console.log(err.response.data.error)
-                        // Comment.findOneAndUpdate({postId:postId},{$pull:{comments:{_id:extCommentId}}})
-                        // .then(r=>{
-                        //     console.log('comment deleted')
-                        //     res.status(500).json({error:err.response.data.error});  
-                        // })
+                    axios.post('http://localhost:8005/events/comment',body);
+                    console.log('done')
+                    res.status(201).send({_id:result[0].comments._id,addedOn:result[0].comments.addedOn,comment:req.body.comment,});
+                    // .then(done=>{
+                    //     console.log(done)
+                    //     res.status(201).send({_id:result[0].comments._id,addedOn:result[0].comments.addedOn,comment:req.body.comment,});
+                    // }
+                    // )
+                    // .catch(err=>{
+                    //     console.log(err.response.data.error)
+                    //     // Comment.findOneAndUpdate({postId:postId},{$pull:{comments:{_id:extCommentId}}})
+                    //     // .then(r=>{
+                    //     //     console.log('comment deleted')
+                    //     //     res.status(500).json({error:err.response.data.error});  
+                    //     // })
                        
-                    })
+                    // })
                 }
             
             }); 
+        })
+        .catch(err=>{
+            console.log(err)
+            res.status(500).json(err)
         })
         // .then(result=>{
         //     Comment.findOne({postId:postId}).select('comments').sort({"comments.comment.addedOn":'1'})

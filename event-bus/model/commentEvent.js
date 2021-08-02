@@ -6,6 +6,7 @@ const commetSchema=new Schema({
         type: String,
         required:true
     },
+    action:String,
     comments:[
         {comment:String,addedOn:{
             type:Date,
