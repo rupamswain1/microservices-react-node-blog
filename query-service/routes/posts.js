@@ -5,7 +5,7 @@ const Router=express();
 Router.get('/',async (req,res)=>{
    const cursor= await UserPost.find().cursor();
    const response=[];
-    for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
+   for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
         response.push(doc);
       }
         
