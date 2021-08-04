@@ -1,8 +1,8 @@
 .postMainContainer{
     position:relative;
     height: 50vh;
-    width:25%;
-    background-color: rgb(126, 236, 141);
+    width:25vw;
+    background-color: rgb(59, 86, 206);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -10,9 +10,10 @@
     align-self: center;
     margin:1%;
     box-shadow: 5px 10px 15px #888888;
+    color: white;
     .postTitle{
         font-weight: bold;
-        font-size: 1.25rem;
+        font-size: 2vw;
         text-decoration: underline;
     }
     .postDescription{
@@ -20,15 +21,17 @@
         display: flex;
         flex-wrap: wrap;
         border:1px solid white;
-        border-radius: 5px;
+        //border-radius: 5px;
         width: 24vw;
         height: 10vh;
         align-self: center;
         overflow: auto;
         text-align: left;
+        background-color: rgb(84, 156, 223);
+        font-size: 1vw;
     }
     .postaddedOn{
-        font-size: 0.7rem;
+        font-size: 0.8vw;
         position: relative;
         left:-9vw;
     }
@@ -43,7 +46,7 @@
         align-self: center;
         .commentHeader{
             font-weight: bold;
-            font-size: 1.25rem;
+            font-size: 1.5vw;
             text-decoration: underline;
         }
         .enterComment{
@@ -56,15 +59,17 @@
             .commentInput{
                 width: 12vw;
                 margin:1%;
+                height: 3vh;
             }
             .commentSubmitBtn{
                 width: 9vw;
-                height: 4.5vh;
+                height: 3.5vh;
                 margin-top: 1%;
                 background-color: rgb(9, 138, 59);
                 border-radius: 5px;
                 color: white;
                 font-weight: bold;
+                font-size: 1vw;
                 &:hover{
                     background-color: white;
                     color: rgb(9, 138, 59);
@@ -75,16 +80,16 @@
         }
         .commentsSection{
             position: relative;
-            display: flex;
-            flex-wrap: wrap;
-            border:1px solid white;
-            border-radius: 5px;
+            //display: flex;
+            //flex-wrap: wrap;
+            //border:1px solid white;
+            border-radius: 10px;
             width: 22vw;
             height: 20vh;
             margin-top: -0%;
-            align-self: center;
+            align-self: flex-start;
             overflow: auto;
-            justify-content: center;
+            justify-content: flex-start;
             .comment{
                 position: relative;
                 display: flex;
@@ -96,11 +101,12 @@
                 align-self:flex-start;
                 //justify-content: left;
                 margin: 0.5vh;
-                background-color: rgb(212, 233, 245);
+                background-color: rgb(23, 34, 134);
                 .commentDate{
-                    font-size: 0.5rem;
+                    font-size: 1vh;
                     position: relative;
                     left:-8vw;
+                    align-self: left;
                 }
                 .commetText{
                     position: relative;

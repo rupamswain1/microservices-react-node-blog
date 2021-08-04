@@ -1,20 +1,24 @@
 .addPostContainer{
     position: relative;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
     align-self: center;
-    width: 30rem;
-    padding: 2rem;
+    align-content: center;
+    width: 30vw;
+    padding: 0.5rem;
     background-color: rgb(192, 245, 220);
-    border-radius: 10px;
+    //border-radius: 10px;
     box-shadow: 5px 10px 15px #888888;
     .addPostHeading{
-        font-size: 2rem;
+        position: relative;
+        font-size: 2vw;
         text-decoration: underline;
         font-weight: bold;
-        padding: 0.5rem;
+        padding: 0.2rem;
         text-shadow: 5px 10px 15px #888888;
+        text-align: center;
     }
     .inputBoxContainer{
         position: relative;
@@ -22,9 +26,9 @@
             box-shadow: 5px 10px 15px #888888;
             border-radius: 5px;
             height: 1.5rem;
-            width: 25rem;
+            width: 25vw;
             outline: none;
-            font-size: 1.5rem;
+            font-size: 1.2vw;
             margin: 1%;
             //align-self: stretch;
         }
@@ -36,10 +40,10 @@
             box-shadow: 5px 10px 15px #888888;
             background-color: rgb(9, 140, 216);
             color: white;
-            height: 2rem;
-            width: 12rem;
+            height: 4vh;
+            width: 14vw;
             border-radius: 5px;
-            font-size: 1rem;
+            font-size: 1vw;
             &:hover{
                 cursor: pointer;
                 background-color: rgb(255, 255, 255);

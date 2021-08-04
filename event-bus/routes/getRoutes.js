@@ -8,15 +8,16 @@ Routes.get('/postEvent',async (req,res)=>{
     const cursor=await PostEvent.find().cursor();
     const response=[];
     for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
-        console.log(doc)
+        //console.log(doc)
         response.push(doc);
     }
-    console.log(response);
+    //console.log(response);
     res.status(200).json(response)
 })
 
-Routes.delete('/deletePostsEvents',async(req,res)=>{
-    const postToDelete=req.body.postToDelete;
+Routes.post('/deletePostsEvents',async(req,res)=>{
+    const postToDelete=req.body;
+   
     PostEvent.deleteMany({_id:{$in:postToDelete}})
     .then(e=>{
         console.log('all post events deleted')
@@ -24,11 +25,12 @@ Routes.delete('/deletePostsEvents',async(req,res)=>{
     })
 })
 
-Routes.delete('/deleteCommentEvents',async(req,res)=>{
-    const postToDelete=req.body.comment;
-    commentEvent.deleteMany({_id:{$in:postToDelete}})
+Routes.post('/deleteCommentEvents',async(req,res)=>{
+    //const postToDelete=req.body;
+    console.log(req.body)
+    commentEvent.deleteMany({postId:{$in:req.body}})
     .then(e=>{
-        console.log('all post events deleted')
+        console.log('all comment events deleted')
     })
 })
 
@@ -36,10 +38,10 @@ Routes.get('/commentevents',async (req,res)=>{
     const cursor=await commentEvent.find().cursor();
     const response=[];
     for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
-        console.log(doc)
+       // console.log(doc)
         response.push(doc);
     }
-    console.log(response);
+    //console.log(response);
     res.status(200).json(response)
 })
 module.exports=Routes

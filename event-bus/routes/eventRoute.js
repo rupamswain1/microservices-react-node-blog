@@ -45,7 +45,9 @@ Router.post('/comment',(req,res,next)=>{
     })
     .then(response=>{
         if(response.status===201){
-            Comment.findOneAndDelete({$and:[{postId:req.body.postId},{comments:{commentId:req.body.commentId}}]})
+            //console.log(req.body.postId)
+            //console.log(req.body.commentId)
+            Comment.findOneAndDelete({postId:req.body.postId},{comments:{commentId:req.body.commentId}})
             .then(done=>{
                 res.status(201).json({message:'success'});
             })
@@ -56,7 +58,8 @@ Router.post('/comment',(req,res,next)=>{
         }
     })
     .catch(err=>{
-        console.log(err.response.data.error)
+        console.log("Failed in Querry Service")
+       // console.log(err.response.data.error)
         //res.status(500).json({error:err.response.data.error})
         res.send({})
     })
