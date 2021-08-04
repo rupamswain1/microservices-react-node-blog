@@ -17,7 +17,7 @@ Routes.get('/postEvent',async (req,res)=>{
 
 Routes.delete('/deletePostsEvents',async(req,res)=>{
     const postToDelete=req.body.postToDelete;
-    PostEvent.deleteMany({_id:postToDelete})
+    PostEvent.deleteMany({_id:{$in:postToDelete}})
     .then(e=>{
         console.log('all post events deleted')
         res.status(200).json()
@@ -26,7 +26,7 @@ Routes.delete('/deletePostsEvents',async(req,res)=>{
 
 Routes.delete('/deleteCommentEvents',async(req,res)=>{
     const postToDelete=req.body.comment;
-    commentEvent.deleteMany({_id:postToDelete})
+    commentEvent.deleteMany({_id:{$in:postToDelete}})
     .then(e=>{
         console.log('all post events deleted')
     })
