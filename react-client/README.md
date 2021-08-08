@@ -1,4 +1,8 @@
 # Getting Started with Create React App
+docker id: 1190c3ea6f7d
+docker image tagged: rupamswain1/react-client
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
