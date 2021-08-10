@@ -1,8 +1,8 @@
-appVersion:v1
-kind:Pod
+apiVersion: v1
+kind: Pod
 metadata:
-  name:posts
+  name: posts
 spec:
   containers:
-    -name:posts
-    image: rupamswain1/post:0.0.1
+    - name: posts
+      image: rupamswain1/post:0.0.1
