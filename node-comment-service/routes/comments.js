@@ -48,7 +48,7 @@ Router.post('/:id',(req,res)=>{
                         addedOn:result[0].comments.addedOn
                     }
                     
-                    axios.post('http://localhost:8005/events/comment',body);
+                    axios.post('http://event-srv:8005/events/comment',body);
                     console.log('done')
                     res.status(201).send({_id:result[0].comments._id,addedOn:result[0].comments.addedOn,comment:req.body.comment,});
                     // .then(done=>{

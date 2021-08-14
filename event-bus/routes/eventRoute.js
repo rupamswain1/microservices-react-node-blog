@@ -9,7 +9,7 @@ Router.post('/posts',(req,res,next)=>{
     //console.log(body)
     new Post({_id:req.body._id,title:req.body.title,content:req.body.content,addedOn:req.body.addedOn,action:'new'}).save()
     .then(eventres=>{
-        return axios.post('http://localhost:8002/events/newPost',body)
+        return axios.post('http://query-cluster-service:8002/events/newPost',body)
     })
     .then(response=>{
         if(response.status===201){
@@ -41,7 +41,7 @@ Router.post('/comment',(req,res,next)=>{
     res.status(201);
     new Comment({postId:req.body.postId,action:'new',comments:[{comment:req.body.comment,addedOn:req.body.addedOn,_id:req.body.commentId}]}).save()
     .then(eventUpdate=>{
-        return axios.post('http://localhost:8002/events/newComment',body)
+        return axios.post('http://query-cluster-service:8002/events/newComment',body)
     })
     .then(response=>{
         if(response.status===201){

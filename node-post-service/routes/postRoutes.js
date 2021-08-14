@@ -18,7 +18,7 @@ Router.post('/',(req,res,next)=>{
         postId=result._id;
         results=body;
         console.log('emtted to event bus for post create')
-        axios.post('http://localhost:8005/events/posts',body)
+        axios.post('http://event-srv:8005/events/posts',body)
         res.status(201).json({_id:results._id,title:results.title,content:results.content,addedOn:results.addedOn});
       
     })

@@ -25,7 +25,7 @@ const syncWithEvents=async ()=>{
     console.log("<<<<<<<<<<<<<<<<<<<<<<<< Syncing POSTS >>>>>>>>>>>>>>>>>>>>>>>>");
     const processedPosts=[];
     const processedComments=[];
-    axios.get('http://localhost:8005/getAll/postEvent')
+    axios.get('http://event-srv:8005/getAll/postEvent')
     .then(eventPosts=>{
         //console.log(eventPosts.data.length)
         const processedPost=[]
@@ -50,11 +50,11 @@ const syncWithEvents=async ()=>{
             processedPosts.push(post.postId);
         })
         console.log(processedPosts)
-        return axios.post("http://localhost:8005/getAll/deletePostsEvents",processedPosts)
+        return axios.post("http://event-srv:8005/getAll/deletePostsEvents",processedPosts)
     })
     .then(postDeleted=>{
         console.log("<<<<<<<<<<<<<<<<<<<<<<<< Syncing COMMENTS >>>>>>>>>>>>>>>>>>>>>>>>");
-        axios.get('http://localhost:8005/getAll/commentevents')
+        axios.get('http://event-srv:8005/getAll/commentevents')
         .then(comments=>{
             comments.data.map(comment=>{
                 //console.log(comment)
@@ -65,13 +65,13 @@ const syncWithEvents=async ()=>{
                     addedOn:comment.comments[0].addedOn
                 }
                 //console.log(body)
-                return axios.post('http://localhost:8002/events/newComment',body)
+                return axios.post('http://query-cluster-service:8002/events/newComment',body)
                 .then(addedComment=>{
                     console.log('===================================================================')
                     console.log(addedComment)
                     processedComments.push(comment.postId);
                     console.log(processedComments)
-                    axios.post("http://localhost:8005/getAll/deleteCommentEvents",processedComments)
+                    axios.post("http://event-srv:8005/getAll/deleteCommentEvents",processedComments)
                     processedComments.pop();
                 })
             })
@@ -83,8 +83,7 @@ const syncWithEvents=async ()=>{
     })
     
 }
-
-mongoose.connect('mongodb+srv://rupam123:rupam123@nodecluster.plaky.mongodb.net/MicroserviceBlogBD?retryWrites=true&w=majority')
+mongoose.connect('mongodb://rupam123:rupam123@nodecluster-shard-00-00.plaky.mongodb.net:27017,nodecluster-shard-00-01.plaky.mongodb.net:27017,nodecluster-shard-00-02.plaky.mongodb.net:27017/MicroserviceBlogBD?ssl=true&replicaSet=atlas-t1w1wl-shard-0&authSource=admin&retryWrites=true&w=majority')
 .then(result=>{
     //change syncWithEvents to promise
     syncWithEvents()
