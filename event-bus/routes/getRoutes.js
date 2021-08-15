@@ -36,12 +36,13 @@ Routes.post('/deleteCommentEvents',async(req,res)=>{
 
 Routes.get('/commentevents',async (req,res)=>{
     const cursor=await commentEvent.find().cursor();
+    console.log(">>get comment from event bus called")
     const response=[];
     for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
        // console.log(doc)
         response.push(doc);
     }
-    //console.log(response);
+    console.log(response);
     res.status(200).json(response)
-})
+}) 
 module.exports=Routes
