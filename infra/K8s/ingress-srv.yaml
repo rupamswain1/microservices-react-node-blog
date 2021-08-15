@@ -9,10 +9,31 @@ spec:
     - host: post.com
       http:
         paths:
+          - path: /posts/allPosts
+            pathType: Prefix
+            backend:
+              service:
+                name: query-cluster-service
+                port:
+                  number: 8002
           - path: /posts
             pathType: Prefix
             backend:
               service:
-                name: post-srv
+                name: post-cluster-service
                 port:
                   number: 8000
+          - path: /comments/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: comment-cluster-service
+                port:
+                  number: 8001
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: react-client-cluster-service
+                port:
+                  number: 3000
