@@ -7,7 +7,7 @@ const AllPostPage=()=>{
     const [posts,setPosts]=useState([]);
     const [dataLoaded,setDataLoaded]=useState(false);
     useEffect(()=>{
-        axios.get('http://localhost:8002/posts/',{headers:{'Content-Type': 'application/json'}})
+        axios.get('http://post.com/posts/allPosts',{headers:{'Content-Type': 'application/json'}})
         .then(respose=>{
             console.log(respose.data.length)
             setPosts(respose.data)

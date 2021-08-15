@@ -2,7 +2,7 @@ const express=require('express');
 const UserPost=require('../model/userPost');
 const Router=express();
 
-Router.get('/',async (req,res)=>{
+Router.get('/allPosts',async (req,res)=>{
    const cursor= await UserPost.find().cursor();
    const response=[];
    for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {

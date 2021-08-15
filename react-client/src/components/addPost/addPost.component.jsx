@@ -8,7 +8,7 @@ const AddPost=({updatePost})=>{
     const submitPost=async (e)=>{
         e.preventDefault();
         const body={title:postInput,content:postDesc};
-        const response=await axios.post('http://localhost:8000/posts/',body,{headers:{'Content-Type': 'application/json'}});
+        const response=await axios.post('http://post.com/posts/',body,{headers:{'Content-Type': 'application/json'}});
         console.log(response.data);
         const newPost={
             postId:response.data._id,
