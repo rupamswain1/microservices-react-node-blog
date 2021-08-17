@@ -9,7 +9,7 @@ Router.post('/posts',(req,res,next)=>{
     //console.log(body)
     new Post({_id:req.body._id,title:req.body.title,content:req.body.content,addedOn:req.body.addedOn,action:'new'}).save()
     .then(eventres=>{
-        return axios.post('http://query-cluster-service:8002/events/newPost',body)
+        return axios.post('http://query-cluster-service:8002/events/newPost',body) 
     })
     .then(response=>{
         if(response.status===201){
@@ -59,7 +59,7 @@ Router.post('/comment',(req,res,next)=>{
     })
     .catch(err=>{
         console.log("Failed in Querry Service")
-       // console.log(err.response.data.error)
+        console.log(err.response.data.error)
         //res.status(500).json({error:err.response.data.error})
         res.send({})
     })

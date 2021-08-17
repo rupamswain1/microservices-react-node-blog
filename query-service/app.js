@@ -16,7 +16,7 @@ app.use((req,res,next)=>{
     next();
 })
 
-app.use('/events',eventRoutes);
+app.use('/events',eventRoutes); 
 app.use('/posts',allPostRouter);
 
 const syncWithEvents=async ()=>{
@@ -64,16 +64,35 @@ const syncWithEvents=async ()=>{
                     commentId:comment.comments[0]._id,
                     addedOn:comment.comments[0].addedOn
                 }
-                //console.log(body)
-                return axios.post('http://query-cluster-service:8002/events/newComment',body)
-                .then(addedComment=>{
-                    console.log('===================================================================')
-                    console.log(addedComment)
-                    processedComments.push(comment.postId);
-                    console.log(processedComments)
-                    axios.post("http://event-srv:8005/getAll/deleteCommentEvents",processedComments)
-                    processedComments.pop();
-                })
+                console.log("Calling new comment of querry service")
+                //return axios.post('http://query-cluster-service:8002/events/newComment',body)
+                console.log(body.postId)
+                Posts.findOne({postId:body.postId})
+                    .then(commentObj=>{
+                        console.log("comment object found >>>>>>",commentObj)
+                        if(commentObj){
+                            
+                            return Posts.updateOne({postId:body.postId},{$push:{comments:{comment:body.comment,commentId:body.commentId,addedOn:body.addedOn}}})
+                        }
+                        else{
+                            return new Posts({postId:body.postId,comments:[{comment:body.comment,commentId:body.commentId,addedOn:body.addedOn}]}).save();
+                        }
+                    })
+                    .then(done=>{
+                        console.log('===================================================================')
+                        console.log("Object Returned after adding on Query DB: ",done)
+                        processedComments.push(body.postId);
+                        console.log("Processed Comments: ",processedComments)
+                        axios.post("http://event-srv:8005/getAll/deleteCommentEvents",processedComments)
+                        processedComments.pop();
+                    })
+                    .catch(err=>{
+                        console.log("Some Error has occured")    
+                        console.log(err)
+                        //res.status(500).json({error:err._message+' error is in Query service, /newComment'});
+                        //res.send({});
+                    });
+               
             })
            
             resolve('pass')

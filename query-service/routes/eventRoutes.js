@@ -22,6 +22,7 @@ Router.post('/newPost',(req,res)=>{
 })
 
 Router.post('/newComment',(req,res)=>{
+    console.log("<<<<<<<<New Comment is called")
     const commentId=req.body.commentId;
     const postId=req.body.postId;
     const comment=req.body.comment;

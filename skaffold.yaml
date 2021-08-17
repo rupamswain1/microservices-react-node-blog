@@ -1,0 +1,50 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy: 
+  kubectl: 
+    manifests: 
+      - ./infra/K8s/*
+build: 
+  local: 
+    push: false
+  artifacts:
+    - image: rupamswain1/react-client
+      context: react-client
+      docker: 
+        dockerfile: Dockerfile
+      sync: 
+        manual: 
+          - src: 'src/**/*.js'
+            dest: .
+    - image: rupamswain1/post
+      context: node-post-service
+      docker: 
+        dockerfile: Dockerfile
+      sync: 
+        manual: 
+          - src: '*.js'
+            dest: .
+    - image: rupamswain1/comments
+      context: node-comment-service
+      docker: 
+        dockerfile: Dockerfile
+      sync: 
+        manual: 
+          - src: '*.js'
+            dest: .
+    - image: rupamswain1/event
+      context: event-bus
+      docker: 
+        dockerfile: Dockerfile
+      sync: 
+        manual: 
+          - src: '*.js'
+            dest: .
+    - image: rupamswain1/query-service
+      context: query-service
+      docker: 
+        dockerfile: Dockerfile
+      sync: 
+        manual: 
+          - src: '*.js'
+            dest: .
