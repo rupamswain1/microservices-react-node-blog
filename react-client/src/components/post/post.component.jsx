@@ -28,7 +28,7 @@ const Post=(singlePost)=>{
     const submitComment= async(event)=>{
             event.preventDefault();
             const body={comment:postComment};
-            const response=await axios.post(`http://post.com/comments/${postId}`,body,{headers:{'Content-Type': 'application/json'}});
+            const response=await axios.post(`http://posts.com/comments/${postId}`,body,{headers:{'Content-Type': 'application/json'}});
             console.log(response.data)
             comments.push(response.data);
             //console.log(comments)

@@ -1,13 +1,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
-metadata: 
+metadata:
   name: ingress-srv
-  annotations: 
+  annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/use-regex: "true"
-spec: 
-  rules: 
-    - host: post.com
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+spec:
+  rules:
+    - host: posts.com
       http:
         paths:
           - path: /posts/allPosts
