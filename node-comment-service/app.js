@@ -17,7 +17,7 @@ app.use((req,res,next)=>{
 
 app.use('/comments',commentRouter);
 
-mongoose.connect('mongodb://rupam123:rupam123@nodecluster-shard-00-00.plaky.mongodb.net:27017,nodecluster-shard-00-01.plaky.mongodb.net:27017,nodecluster-shard-00-02.plaky.mongodb.net:27017/MicroserviceBlogBD?ssl=true&replicaSet=atlas-t1w1wl-shard-0&authSource=admin&retryWrites=true&w=majority')
+mongoose.connect('')//Enter the mongoDB key here
 .then(result=>{
     app.listen(8001,()=>{
         console.log('server started on 8001');
